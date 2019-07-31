@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Employee",
+    "description": "Basic Employee data in the organization",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The unique identifier of an employee",
+            "type": "integer"
+        },
+        "name": {
+            "description": "Name of the employee",
+            "type": "string"
+        },
+        "age": {
+            "type": "number",
+            "minimum": 20,
+            "exclusiveMinimum": true
+        },
+        "dateOfBirth": {
+            "type": "string",
+        }
+    },
+    "required": ["id", "name", "age","dateOfBirth"]
+}
