@@ -26,10 +26,9 @@ public class ValidationController {
 		boolean validJson = false;
 		
 		File schemaFile = new File("/schema/schema.json");
-	    File jsonFile = new File("/Users/XYZ/data.json");
 	    	
 	    try {
-			if (ValidationUtil.isJsonValid(schemaFile, jsonFile)){
+	    	if (ValidationUtil.validateJsonResource(schemaFile.toString(), emp.toString())){
 				validJson = true;
 				log.info("The received JSON is valid {}", validJson);
 			}else{

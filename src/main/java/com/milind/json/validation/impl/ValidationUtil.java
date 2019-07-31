@@ -62,13 +62,21 @@ public class ValidationUtil {
 		return _getSchemaNode(schemaNode);
 	} // getSchemaNode() ends
 
-	public static void validateJson(JsonSchema jsonSchemaNode, JsonNode jsonNode) throws ProcessingException {
+	public static boolean validateJson(JsonSchema jsonSchemaNode, JsonNode jsonNode) throws ProcessingException {
+		
+		boolean isValid = false;
+		
 		ProcessingReport report = jsonSchemaNode.validate(jsonNode);
 		if (!report.isSuccess()) {
+			isValid = false;
 			for (ProcessingMessage processingMessage : report) {
 				throw new ProcessingException(processingMessage);
 			}
+		}else {
+			isValid = true;
 		}
+		
+		return isValid;
 	} // validateJson(Node) ends
 
 	public static boolean isJsonValid(JsonSchema jsonSchemaNode, JsonNode jsonNode) throws ProcessingException {
@@ -112,11 +120,11 @@ public class ValidationUtil {
 		validateJson(schemaNode, jsonNode);
 	} // validateJson(URL) ends
 
-	public static void validateJsonResource(String schemaResource, String jsonResource)
+	public static boolean validateJsonResource(String schemaResource, String jsonResource)
 			throws IOException, ProcessingException {
 		final JsonSchema schemaNode = getSchemaNode(schemaResource);
 		final JsonNode jsonNode = getJsonNodeFromResource(jsonResource);
-		validateJson(schemaNode, jsonNode);
+		return validateJson(schemaNode, jsonNode);
 	} // validateJsonResource() ends
 
 	private static JsonSchema _getSchemaNode(JsonNode jsonNode) throws ProcessingException {
