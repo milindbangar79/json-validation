@@ -44,22 +44,22 @@ public class ValidationUtil {
 
 	public static JsonSchema getSchemaNode(String schemaText) throws IOException, ProcessingException {
 		final JsonNode schemaNode = getJsonNode(schemaText);
-		return _getSchemaNode(schemaNode);
+		return getSchemaNode(schemaNode);
 	} // getSchemaNode(text) ends
 
 	public static JsonSchema getSchemaNode(File schemaFile) throws IOException, ProcessingException {
 		final JsonNode schemaNode = getJsonNode(schemaFile);
-		return _getSchemaNode(schemaNode);
+		return getSchemaNode(schemaNode);
 	} // getSchemaNode(File) ends
 
 	public static JsonSchema getSchemaNode(URL schemaFile) throws IOException, ProcessingException {
 		final JsonNode schemaNode = getJsonNode(schemaFile);
-		return _getSchemaNode(schemaNode);
+		return getSchemaNode(schemaNode);
 	} // getSchemaNode(URL) ends
 
 	public static JsonSchema getSchemaNodeFromResource(String resource) throws IOException, ProcessingException {
 		final JsonNode schemaNode = getJsonNodeFromResource(resource);
-		return _getSchemaNode(schemaNode);
+		return getSchemaNode(schemaNode);
 	} // getSchemaNode() ends
 
 	public static boolean validateJson(JsonSchema jsonSchemaNode, JsonNode jsonNode) throws ProcessingException {
@@ -127,7 +127,7 @@ public class ValidationUtil {
 		return validateJson(schemaNode, jsonNode);
 	} // validateJsonResource() ends
 
-	private static JsonSchema _getSchemaNode(JsonNode jsonNode) throws ProcessingException {
+	private static JsonSchema getSchemaNode(JsonNode jsonNode) throws ProcessingException {
 		final JsonNode schemaIdentifier = jsonNode.get(JSON_SCHEMA_IDENTIFIER_ELEMENT);
 		if (null == schemaIdentifier) {
 			((ObjectNode) jsonNode).put(JSON_SCHEMA_IDENTIFIER_ELEMENT, JSON_V4_SCHEMA_IDENTIFIER);
@@ -135,6 +135,6 @@ public class ValidationUtil {
 
 		final JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
 		return factory.getJsonSchema(jsonNode);
-	} // _getSchemaNode() ends
+	} // getSchemaNode() ends
 
 }
